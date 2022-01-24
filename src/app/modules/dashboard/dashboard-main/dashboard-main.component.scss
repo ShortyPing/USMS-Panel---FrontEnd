@@ -1,0 +1,28 @@
+h1 {
+  font-size: 3rem;
+  text-align: center;
+}
+
+h3 {
+  font-size: 2rem;
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+.cards {
+  @apply tw-mx-auto tw-flex tw-justify-center;
+  .card {
+    display: inline-block;
+    width: 300px;
+    @apply tw-bg-layout-background-dark-01 tw-m-4 tw-rounded tw-p-5 tw-border tw-border-orange-700 tw-text-center;
+    h1 {
+      font-size: 1.5rem;
+      @apply tw-font-bold;
+    }
+
+    p {
+      @apply tw-pt-3
+    }
+  }
+
+}

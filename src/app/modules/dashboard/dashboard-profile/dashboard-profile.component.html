@@ -1,0 +1,56 @@
+<h1>Profil</h1>
+<h3>Hier kannst du dein Profil verwalten. Z.B Passwort ändern oder Lizenzen hinzufügen</h3>
+<hr>
+<div class="grid tw-grid tw-grid-cols-2 tw-grid-rows-1 tw-grid-flow-col tw-text-center tw-gap-4">
+  <div class="container">
+    <h1>Passwort Ändern</h1>
+    <p class="success" *ngIf="success">{{success}}</p>
+    <p class="error" *ngIf="error">{{error}}</p>
+    <form [formGroup]="changePasswordForm" (ngSubmit)="changePassword()">
+      <div>
+        <input type="password" id="oldPassword" name="oldPassword" placeholder="Altes Passwort"
+               formControlName="oldPassword">
+      </div>
+      <div>
+        <input type="password" id="newPassword" name="newPassword" placeholder="Neues Passwort"
+               formControlName="newPassword">
+      </div>
+      <div>
+        <input type="password" id="repeatNewPassword" name="repeatNewPassword" placeholder="Passwort wiederholen"
+               formControlName="repeatNewPassword">
+      </div>
+      <div>
+        <button class="button">Ändern</button>
+      </div>
+    </form>
+  </div>
+  <div class="container">
+    <h1>Lizenzen Verwalten</h1>
+    <p class="success" *ngIf="successLicense">{{successLicense}}</p>
+    <p class="error" *ngIf="errorLicense">{{error}}</p>
+    <form [formGroup]="licenseForm" (change)="changeLicenses()">
+      <div>
+        <div class="group">
+          <p class="checkbox-label">PKW-Führerschein</p>
+          <input formControlName="carLicense" type="checkbox">
+        </div>
+        <div class="group">
+          <p class="checkbox-label">LKW-Führerschein</p>
+          <input formControlName="truckLicense" type="checkbox">
+        </div>
+        <div class="group">
+          <p class="checkbox-label">Motorrad-Führerschein</p>
+          <input formControlName="bikeLicense" type="checkbox">
+        </div>
+        <div class="group">
+          <p class="checkbox-label">Flugschein</p>
+          <input formControlName="planeLicense" type="checkbox">
+        </div>
+        <div class="group">
+          <p class="checkbox-label">Waffenschein</p>
+          <input formControlName="weaponLicense" type="checkbox">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

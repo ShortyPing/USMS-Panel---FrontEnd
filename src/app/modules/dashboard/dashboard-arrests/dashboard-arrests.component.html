@@ -1,0 +1,123 @@
+<h1>Inhaftierungen</h1>
+<h3>Hier könnt Ihr eure Inhaftierungen einsehen, verwalten.</h3>
+
+<hr>
+
+<div class="tw-grid-flow-col tw-grid-rows-1 tw-grid-cols-3 tw-grid tw-gap-4 tw-m-4">
+  <div class="col tw-border tw-border-2 tw-border-orange-700 tw-rounded">
+    <h1>Verhaftung hinzufügen</h1>
+    <p class="success" *ngIf="arrestSuccess">{{arrestSuccess}}</p>
+    <p class="error" *ngIf="arrestError">{{arrestError}}</p>
+    <form [formGroup]="arrestForm" (ngSubmit)="createArrest()">
+      <div class="group">
+        <input formControlName="prisonerName" type="text" placeholder="Name d. Gefangenen">
+      </div>
+      <div class="group">
+        <select formControlName="wing">
+          <option disabled selected value="">Wähle einen Zellentrakt</option>
+          <option value="right">Rechts</option>
+          <option value="left">Links</option>
+        </select>
+      </div>
+      <div class="group">
+        <input formControlName="time" type="number" placeholder="Einheiten">
+      </div>
+      <div class="group">
+        <input formControlName="floorNumber" type="number" placeholder="Ebene">
+      </div>
+      <div class="group">
+        <input formControlName="cellNumber" type="number" placeholder="Zelle">
+      </div>
+      <div class="group">
+        <select formControlName="yard">
+          <option disabled selected value="">Hofgang</option>
+          <option value="true">Ja</option>
+          <option value="false">Nein</option>
+        </select>
+      </div>
+      <div class="group">
+        <input formControlName="fraction" type="text" placeholder="Fraktion (optional)">
+      </div>
+      <div class="group tw-mx-auto">
+        <button type="submit" class="tw-bg-green-700 tw-mx-auto tw-p-4 tw-rounded">Abschicken</button>
+      </div>
+    </form>
+  </div>
+  <div class="col tw-border tw-border-2 tw-border-orange-700 tw-rounded">
+    <h1>10 letzten Verhaftungen (Global)</h1>
+    <div style="overflow-x:auto;">
+      <table>
+        <tr>
+          <th>#</th>
+          <th>Name d. Gefangenen</th>
+          <th>Wärter</th>
+          <th>Flügel</th>
+          <th>Ebene</th>
+          <th>Zelle</th>
+          <th>Einheiten</th>
+          <th>Eingesperrt am</th>
+          <th>Hofgang?</th>
+          <th>Fraktion</th>
+
+        <tr *ngFor="let arrest of lastTenArrests, let i = index">
+          <td>{{i + 1}}</td>
+          <td>{{arrest.prisonerName}}</td>
+          <td>{{arrest.warden |username | async}}</td>
+          <td>{{arrest.wing | wing}}</td>
+          <td>{{arrest.floorNumber}}</td>
+          <td>{{arrest.cellNumber}}</td>
+          <td>{{arrest.time}}</td>
+          <td>{{arrest.timeCreated | date: "dd.MM.yyyy HH:mm:ss"}}</td>
+          <td>{{arrest.yard ? "Ja" : "Nein"}}</td>
+          <td>{{arrest.fraction || 'Nicht Angegeben'}}</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="col tw-border tw-border-2 tw-border-orange-700 tw-rounded">
+    <h1>Verhaftung Suchen</h1>
+    <form [formGroup]="searchForm" (ngSubmit)="search()">
+      <p class="error" *ngIf="searchError">{{searchError}}</p>
+      <div class="group">
+        <input formControlName="name" placeholder="Name d. Gefangenen">
+      </div>
+      <div class="group">
+        <button type="submit" class="tw-bg-green-700 tw-mx-auto tw-p-4 tw-rounded">Suchen</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="col tw-m-4 tw-border tw-border-2 tw-border-orange-700 tw-rounded">
+  <h1>Suchergebnis</h1>
+  <h3 *ngIf="searchResult.length == 0">Kein passender Eintrag gefunden.</h3>
+  <div style="overflow-x: auto">
+    <table style="overflow-x:auto;" *ngIf="searchResult.length >= 1">
+      <tr>
+        <th>#</th>
+        <th>Name d. Gefangenen</th>
+        <th>Wärter</th>
+        <th>Flügel</th>
+        <th>Ebene</th>
+        <th>Zelle</th>
+        <th>Einheiten</th>
+        <th>Eingesperrt am</th>
+        <th>Hofgang?</th>
+        <th>Fraktion</th>
+      <tr *ngFor="let arrest of searchResult, let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{arrest.prisonerName}}</td>
+        <td>{{arrest.warden |username | async}}</td>
+        <td>{{arrest.wing | wing}}</td>
+        <td>{{arrest.floorNumber}}</td>
+        <td>{{arrest.cellNumber}}</td>
+        <td>{{arrest.time}}</td>
+        <td>{{arrest.timeCreated | date: "dd.MM.yyyy HH:mm:ss"}}</td>
+        <td>{{arrest.yard ? "Ja" : "Nein"}}</td>
+        <td>{{arrest.fraction || 'Nicht Angegeben'}}</td>
+      </tr>
+    </table>
+  </div>
+</div>

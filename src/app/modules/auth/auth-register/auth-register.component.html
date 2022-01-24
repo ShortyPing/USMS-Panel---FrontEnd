@@ -1,0 +1,64 @@
+<div class="card">
+  <img src="assets/img/usms-logo-96.png">
+  <h1>Registrieren</h1>
+
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <div *ngIf="error" class="error">
+      {{error}}
+    </div>
+    <div *ngIf="success" class="success">
+      Registrierung erfolgreich! Bitte warte bis dich die Personalabteilung freigeschalten hat. Du wirst ein 5 Sekunden zum Login weitergeleitet.
+    </div>
+    <div class="group">
+      <input formControlName="username" type="text" id="username" name="username" placeholder="Benutzername">
+    </div>
+    <div class="group">
+      <input formControlName="forename" type="text" id="forename" name="forename" placeholder="Vorname">
+    </div>
+    <div class="group">
+      <input formControlName="lastname" type="text" id="lastname" name="lastname" placeholder="Nachname">
+    </div>
+    <div class="group">
+      <input formControlName="password" type="password" id="password" name="password" placeholder="Passwort">
+    </div>
+    <div class="group">
+      <input formControlName="discordtag" type="text" id="discordtag" name="password" placeholder="Discord Tag">
+    </div>
+    <div class="group">
+      <input formControlName="steamname" type="text" id="steamname" name="password" placeholder="Steam Name">
+    </div>
+    <div class="group">
+      <input formControlName="phonenumber" type="text" id="phonenumber" name="password" placeholder="Phone Number">
+    </div>
+    <div class="group">
+      <p class="checkbox-label">PKW-Führerschein</p>
+      <input formControlName="carlicense" type="checkbox">
+    </div>
+    <div class="group">
+      <p class="checkbox-label">LKW-Führerschein</p>
+      <input formControlName="trucklicense" type="checkbox">
+    </div>
+    <div class="group">
+      <p class="checkbox-label">Motorrad-Führerschein</p>
+      <input formControlName="bikelicense" type="checkbox">
+    </div>
+    <div class="group">
+      <p class="checkbox-label">Flugschein</p>
+      <input formControlName="planelicense" type="checkbox">
+    </div>
+    <div class="group">
+      <p class="checkbox-label">Waffenschein</p>
+      <input formControlName="weaponlicense" type="checkbox">
+    </div>
+    <div class="group">
+      <select name="rank" formControlName="rank" id="rank">
+        <option value="" disabled selected>Wähle einen Rang für den du dich Bewerben willst.</option>
+        <option *ngFor="let rank of availableRanksForRegister" value="{{rank.rankId}}">{{rank.name}}</option>
+      </select>
+    </div>
+    <div class="group">
+      <button class="button">Registrieren</button>
+    </div>
+    <p routerLink="/">Du hast schon einen Account? Dann logge dich hier ein.</p>
+  </form>
+</div>

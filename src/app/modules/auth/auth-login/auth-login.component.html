@@ -1,0 +1,26 @@
+<div class="card">
+  <img src="assets/img/usms-logo-96.png">
+  <h1>Login</h1>
+
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <div *ngIf="error" class="error">
+      {{error}}
+    </div>
+    <div *ngIf="success" class="success">
+      Login erfolgreich! Du wirst in ein paar Sekunden weitergeleitet.
+    </div>
+    <div *ngIf="info" class="info">
+      {{info}}
+    </div>
+    <div class="group">
+      <input formControlName="username" type="text" id="username" name="username" placeholder="Benutzername">
+    </div>
+    <div class="group">
+      <input formControlName="password" type="password" id="password" name="password" placeholder="Passwort">
+    </div>
+    <div class="group">
+      <button class="button">Einloggen</button>
+    </div>
+    <p routerLink="/register">Du möchtest dem Dienst beitreten? Dann registriere dich hier!</p>
+  </form>
+</div>

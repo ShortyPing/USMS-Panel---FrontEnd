@@ -1,0 +1,56 @@
+{
+  "asar": false,
+  "productName": "United States Marshal Service - Panel",
+  "directories": {
+    "output": "release/"
+  },
+  "files": [
+    "**/*",
+    "!**/*.ts",
+    "!*.map",
+    "!package.json",
+    "!package-lock.json"
+  ],
+  "extraResources": [
+    {
+      "from": "dist",
+      "to": "app",
+      "filter": [
+        "**/*"
+      ]
+    }
+  ],
+  "win": {
+    "icon": "dist/assets/icons",
+    "target": [
+      "portable"
+    ],
+    "publisherName": "Michael Steinmötzger (ShortPing)",
+    "legalTrademarks": "(c) Michael Steinmötzger 2021"
+  },
+  "nsis": {
+    "deleteAppDataOnUninstall": true,
+    "allowToChangeInstallationDirectory": true,
+    "oneClick": false,
+    "license": "license.txt",
+    "installerSidebar": null,
+    "installerLanguages": ["de_DE", "en_US"],
+    "perMachine": true,
+    "multiLanguageInstaller": true
+  },
+  "portable": {
+    "splashImage": "dist/assets/icons/electron.bmp"
+  },
+  "mac": {
+    "icon": "dist/assets/icons",
+    "target": [
+      "dmg"
+    ]
+  },
+  "linux": {
+    "icon": "dist/assets/icons",
+    "target": [
+      "AppImage"
+    ]
+  }
+}

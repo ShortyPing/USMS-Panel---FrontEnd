@@ -1,0 +1,26 @@
+<h1>United States Marshal Service</h1>
+<h3>Willkommen, {{getRank(user.rank)}} <strong>{{user.forename}} {{user.lastname}}</strong></h3>
+<div class="cards">
+  <div class="card">
+    <h1>Name</h1>
+    <hr>
+    <p>{{user.forename}} {{user.lastname}}</p>
+  </div>
+  <div class="card">
+    <h1>Dienstnummer</h1>
+    <hr>
+    <p>{{user.dutyNumber}}</p>
+  </div>
+  <div class="card">
+    <h1>Rang</h1>
+    <hr>
+    <p>{{getRank(user.rank) || "Fehler, bitte wende dich an die Leitung!"}}</p>
+  </div>
+  <div class="card">
+    <h1>Deine Punkte</h1>
+    <hr>
+    <p>{{user.points}}</p>
+  </div>
+
+
+</div>

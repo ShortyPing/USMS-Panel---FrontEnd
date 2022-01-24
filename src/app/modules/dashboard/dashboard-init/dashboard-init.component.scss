@@ -1,0 +1,47 @@
+.navbar {
+  width: 100%;
+  @apply tw-fixed tw-bg-layout-background-dark-01 tw-pb-5 tw-pt-5;
+  padding: 0;
+  ul {
+    height: 30px;
+    @apply tw-mt-2 tw-mb-2;
+    display: flex;
+    li {
+      display: inline-block;
+
+      height: 100%;
+      p {
+        @apply tw-inline-block tw-pr-5 tw-pl-5 tw-bg-layout-background-dark tw-mr-5 first:tw-ml-5 tw-pt-2 tw-pb-1 tw-cursor-pointer;
+
+        &.active {
+          @apply tw-bg-orange-800;
+        }
+      }
+
+    }
+
+    #logout {
+      margin-left: auto;
+      p {
+        @apply tw-bg-red-700;
+      }
+    }
+
+    #profile {
+      margin-left: auto;
+      background-color: #191919 !important;
+
+      &.active {
+        background-color: rgb(154 52 18) !important;
+      }
+    }
+
+    #reload {
+      background-color: green !important
+    }
+  }
+}
+
+.content {
+  padding-top: 90px;
+}

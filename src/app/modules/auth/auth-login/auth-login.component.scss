@@ -1,0 +1,47 @@
+.card {
+  width: 30%;
+  margin-top: 100px;
+  @apply tw-bg-layout-background-dark-01 tw-mx-auto tw-rounded;
+  img {
+    display: block;
+    border-radius: 100%;
+    padding-top: 25px;
+    margin: 1px auto 1px;
+  }
+
+  h1 {
+    @apply tw-text-center tw-pt-6 tw-pb-6;
+    font-size: 2rem;
+  }
+
+  .group {
+    @apply tw-flex tw-items-center
+  }
+
+  .button {
+    width: 25%;
+    height: 30px;
+    @apply tw-text-center tw-bg-green-600 tw-mx-auto tw-rounded tw-mb-4;
+  }
+
+
+  p {
+    @apply tw-text-center tw-text-gray-500 tw-cursor-pointer tw-pb-4;
+  }
+
+  .error {
+    width: 80%;
+    @apply tw-text-center tw-bg-red-500 tw-mx-auto tw-rounded tw-p-2 tw-mb-4;
+  }
+
+  .success {
+    width: 80%;
+    @apply tw-text-center tw-bg-green-600 tw-mx-auto tw-rounded tw-p-2 tw-mb-4;
+  }
+
+  .info {
+    width: 80%;
+    @apply tw-text-center tw-bg-blue-600 tw-mx-auto tw-rounded tw-p-2 tw-mb-4;
+
+  }
+}

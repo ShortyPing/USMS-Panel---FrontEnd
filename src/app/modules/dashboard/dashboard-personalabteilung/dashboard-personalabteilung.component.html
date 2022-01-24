@@ -1,0 +1,340 @@
+<h1>Verwaltung: Personalabteilung</h1>
+<hr>
+<div class="col tw-m-4 tw-border tw-border-2 tw-border-orange-700 tw-rounded">
+  <h1>Liste aller Mitarbeiter</h1>
+
+  <div class="buttons">
+
+    <button (click)="previousPage()" class="tw-rounded tw-bg-yellow-500 tw-pt-2 tw-pb-2 tw-pr-3 tw-pl-3">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
+    <button (click)="nextPage()" class="tw-rounded tw-bg-yellow-500 tw-pt-2 tw-pb-2 tw-pr-3 tw-pl-3">
+      <i class="fa-solid fa-arrow-right"></i>
+    </button>
+    <p>Derzeitige Seite: {{currentPage + 1}}</p>
+
+    <div style="overflow-x: auto">
+      <table style="width: 95%">
+        <tr>
+          <th>Index</th>
+          <th>Benutzername</th>
+          <th>Vorname</th>
+          <th>Nachname</th>
+          <th>Discord Tag</th>
+          <th>Dienstnummer</th>
+          <th>Telefonnummer</th>
+          <th>PKW-Führerschein</th>
+          <th>Motorrad-Führerschein</th>
+          <th>Waffenschein</th>
+          <th>LKW-Führerschein</th>
+          <th>Flugschein</th>
+          <th>Punkte</th>
+          <th>Rang</th>
+          <th>Steam Name</th>
+          <th>Registriert am</th>
+          <th>Ausbilder</th>
+          <th>Personalabteilung</th>
+          <th>Leitung</th>
+          <th>Aktionen</th>
+        </tr>
+        <tr *ngFor="let user of users; let i = index">
+          <td>{{(currentPage * 10) + (i + 1)}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.forename}}</td>
+          <td>{{user.lastname}}</td>
+          <td>{{user.discordTag}}</td>
+          <td>{{user.dutyNumber}}</td>
+          <td>{{user.phoneNumber}}</td>
+          <td>
+            <i *ngIf="user.licenses.car" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.car" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.licenses.bike" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.bike" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.licenses.weapon" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.weapon" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.licenses.truck" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.truck" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.licenses.plane" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.plane" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>{{user.points}}</td>
+          <td>{{getRank(user.rank)}}</td>
+          <td>{{user.steamName}}</td>
+          <td>{{user.timeCreated | date:"dd.MM.yyyy HH:mm:ss"}}</td>
+          <td>
+            <i *ngIf="user.specialPermissions.ausbilder" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.specialPermissions.ausbilder" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.specialPermissions.personalabteilung" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.specialPermissions.personalabteilung" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.specialPermissions.leitung" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.specialPermissions.leitung" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <div style="display: flex">
+              <button class="tw-rounded tw-bg-red-600 tw-p-4" (click)="terminateUser(user._id)">Kündigen</button>
+              <button class="tw-rounded tw-bg-amber-500 tw-p-4">Verwalten</button>
+            </div>
+
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="col tw-m-4 tw-border tw-border-2 tw-border-orange-700 tw-rounded">
+  <h1>Nicht verifizierte Mitarbeiter</h1>
+
+  <div class="buttons">
+
+
+    <div style="overflow-x: auto">
+      <table style="width: 95%">
+        <tr>
+          <th>Index</th>
+          <th>Benutzername</th>
+          <th>Vorname</th>
+          <th>Nachname</th>
+          <th>Discord Tag</th>
+          <th>Dienstnummer</th>
+          <th>Telefonnummer</th>
+          <th>PKW-Führerschein</th>
+          <th>Motorrad-Führerschein</th>
+          <th>Waffenschein</th>
+          <th>LKW-Führerschein</th>
+          <th>Flugschein</th>
+          <th>Punkte</th>
+          <th>Rang</th>
+          <th>Steam Name</th>
+          <th>Registriert am</th>
+          <th>Ausbilder</th>
+          <th>Personalabteilung</th>
+          <th>Leitung</th>
+          <th>Aktionen</th>
+        </tr>
+        <tr *ngFor="let user of notVerifiedUsers; let i = index">
+          <td>{{(currentPage * 10) + (i + 1)}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.forename}}</td>
+          <td>{{user.lastname}}</td>
+          <td>{{user.discordTag}}</td>
+          <td>{{user.dutyNumber}}</td>
+          <td>{{user.phoneNumber}}</td>
+          <td>
+            <i *ngIf="user.licenses.car" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.car" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.licenses.bike" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.bike" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.licenses.weapon" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.weapon" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.licenses.truck" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.truck" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.licenses.plane" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.plane" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>{{user.points}}</td>
+          <td>{{getRank(user.rank)}}</td>
+          <td>{{user.steamName}}</td>
+          <td>{{user.timeCreated | date:"dd.MM.yyyy HH:mm:ss"}}</td>
+          <td>
+            <i *ngIf="user.specialPermissions.ausbilder" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.specialPermissions.ausbilder" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.specialPermissions.personalabteilung" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.specialPermissions.personalabteilung" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.specialPermissions.leitung" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.specialPermissions.leitung" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <div style="display: flex">
+              <button class="tw-rounded tw-bg-green-600 tw-p-4" (click)="verifyUser(user._id)">Verifizieren</button>
+              <button class="tw-rounded tw-bg-red-600 tw-p-4" (click)="rejectVerifyUser(user._id)">Ablehnen</button>
+            </div>
+
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="col tw-m-4 tw-border tw-border-2 tw-border-orange-700 tw-rounded">
+  <h1>Liste gekündigte Mitarbeiter</h1>
+
+  <button *ngIf="!showTerminatedUsers" style="width: 100%" class="tw-bg-green-600 tw-rounded tw-p-4"
+          (click)="showTerminatedUsers = true">Anzeigen
+  </button>
+  <div *ngIf="showTerminatedUsers" class="buttons">
+
+    <div style="overflow-x: auto">
+      <table style="width: 95%">
+        <tr>
+          <th>Index</th>
+          <th>Benutzername</th>
+          <th>Vorname</th>
+          <th>Nachname</th>
+          <th>Discord Tag</th>
+          <th>Dienstnummer</th>
+          <th>Telefonnummer</th>
+          <th>PKW-Führerschein</th>
+          <th>Motorrad-Führerschein</th>
+          <th>Waffenschein</th>
+          <th>LKW-Führerschein</th>
+          <th>Flugschein</th>
+          <th>Punkte</th>
+          <th>Rang</th>
+          <th>Steam Name</th>
+          <th>Registriert am</th>
+          <th>Ausbilder</th>
+          <th>Personalabteilung</th>
+          <th>Leitung</th>
+          <th>Aktionen</th>
+        </tr>
+        <tr *ngFor="let user of terminatedUsers; let i = index">
+          <td>{{(currentPage * 10) + (i + 1)}}</td>
+          <td>{{user.username}}</td>
+          <td>{{user.forename}}</td>
+          <td>{{user.lastname}}</td>
+          <td>{{user.discordTag}}</td>
+          <td>{{user.dutyNumber}}</td>
+          <td>{{user.phoneNumber}}</td>
+          <td>
+            <i *ngIf="user.licenses.car" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.car" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.licenses.bike" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.bike" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.licenses.weapon" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.weapon" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.licenses.truck" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.truck" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.licenses.plane" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.licenses.plane" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>{{user.points}}</td>
+          <td>{{getRank(user.rank)}}</td>
+          <td>{{user.steamName}}</td>
+          <td>{{user.timeCreated | date:"dd.MM.yyyy HH:mm:ss"}}</td>
+          <td>
+            <i *ngIf="user.specialPermissions.ausbilder" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.specialPermissions.ausbilder" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.specialPermissions.personalabteilung" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.specialPermissions.personalabteilung" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <i *ngIf="user.specialPermissions.leitung" style="color: green" class="fa-solid fa-check"></i>
+            <i *ngIf="!user.specialPermissions.leitung" style="color: red" class="fa-solid fa-xmark"></i>
+          </td>
+          <td>
+            <div style="display: flex">
+              <button class="tw-rounded tw-bg-green-600 tw-p-4" (click)="unterminateUser(user._id)">Einstellen</button>
+              <button class="tw-rounded tw-bg-amber-500 tw-p-4">Verwalten</button>
+            </div>
+
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="col tw-m-4 tw-border tw-border-2 tw-border-orange-700 tw-rounded">
+  <h1>Nicht verifizierte Verhaftungen</h1>
+  <div style="overflow-x: auto">
+    <table style="width: 100%">
+      <tr>
+        <th>#</th>
+        <th>Name d. Gefangenen</th>
+        <th>Wärter</th>
+        <th>Flügel</th>
+        <th>Ebene</th>
+        <th>Zelle</th>
+        <th>Einheiten</th>
+        <th>Eingesperrt am</th>
+        <th>Hofgang?</th>
+        <th>Fraktion</th>
+        <th>Aktionen</th>
+
+      <tr *ngFor="let arrest of unconfirmedArrests, let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{arrest.prisonerName}}</td>
+        <td>{{arrest.warden |username | async}}</td>
+        <td>{{arrest.wing | wing}}</td>
+        <td>{{arrest.floorNumber}}</td>
+        <td>{{arrest.cellNumber}}</td>
+        <td>{{arrest.time}}</td>
+        <td>{{arrest.timeCreated | date: "dd.MM.yyyy HH:mm:ss"}}</td>
+        <td>{{arrest.yard ? "Ja" : "Nein"}}</td>
+        <td>{{arrest.fraction || 'Nicht Angegeben'}}</td>
+        <td>
+          <div style="display: flex">
+            <button class="tw-rounded tw-bg-green-600 tw-p-4" (click)="confirmArrest(arrest._id)">Verifizieren</button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<div class="col tw-m-4 tw-border tw-border-2 tw-border-orange-700 tw-rounded">
+  <h3 style="margin-top: 50px">Nicht verifizierte Schichten</h3>
+  <table>
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th>Person</th>
+      <th scope="col">Startzeit</th>
+      <th scope="col">Endzeit</th>
+      <th scope="col">Vergangene Zeit</th>
+      <th scope="col">Aktionen</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let duty of unverifiedDuties; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{duty.user | username | async}}</td>
+      <td>{{duty.startTime | date:"dd.MM.yyyy HH:mm"}}</td>
+      <td>{{duty.endTime | date:"dd.MM.yyyy HH:mm"}}</td>
+      <td>{{calcDateDuty(duty)}}</td>
+      <td>
+        <div style="display: flex">
+          <button class="tw-rounded tw-bg-green-600 tw-p-4" (click)="confirmDuty(duty._id)">Verifizieren</button>
+        </div>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>

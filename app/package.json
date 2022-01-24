@@ -1,0 +1,10 @@
+{
+  "name": "usms-panel",
+  "author": {
+    "name": "Michael Steinmötzger"
+  },
+  "version": "0.1.0",
+  "main": "main.js",
+  "private": true,
+  "dependencies": {}
+}

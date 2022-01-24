@@ -1,0 +1,38 @@
+<div class="container">
+
+  <h1>Schichten</h1>
+  <h3>Hier könnt Ihr eure Schichten einsehen, verwalten, starten und beenden.</h3>
+
+  <hr>
+
+  <div class="tw-grid tw-grid-rows-1 tw-grid-cols-2">
+    <div class="manage-row">
+      <button id="start" (click)="startDuty()" [disabled]="currentDuty != undefined">Schicht beginnen</button>
+    </div>
+    <div class="manage-row">
+      <button id="stop" (click)="endDuty()" [disabled]="currentDuty == undefined">Schicht beenden</button>
+    </div>
+  </div>
+
+  <h3 style="margin-top: 50px">Vergangene Schichten</h3>
+  <table>
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Startzeit</th>
+      <th scope="col">Endzeit</th>
+      <th scope="col">Vergangene Zeit</th>
+      <th scope="col">Bestätigt</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let duty of lastTenDuties; index as i">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{duty.startTime | date:"dd.MM.yyyy HH:mm"}}</td>
+      <td>{{duty.endTime | date:"dd.MM.yyyy HH:mm"}}</td>
+      <td>{{calcDateDuty(duty)}}</td>
+      <td [ngClass]="duty.confirmed?'tw-text-green-700':'tw-text-red-600'">{{duty.confirmed?"Ja":"Nein"}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
