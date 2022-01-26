@@ -20,13 +20,13 @@
         </select>
       </div>
       <div class="group">
-        <input formControlName="time" type="number" placeholder="Einheiten">
+        <input min="1" formControlName="time" type="number" placeholder="Einheiten">
       </div>
       <div class="group">
-        <input formControlName="floorNumber" type="number" placeholder="Ebene">
+        <input min="1" max="3" formControlName="floorNumber" type="number" placeholder="Ebene">
       </div>
       <div class="group">
-        <input formControlName="cellNumber" type="number" placeholder="Zelle">
+        <input min="1" max="8" formControlName="cellNumber" type="number" placeholder="Zelle">
       </div>
       <div class="group">
         <select formControlName="yard">

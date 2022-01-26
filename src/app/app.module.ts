@@ -17,7 +17,7 @@ import {User} from "../dto/user.dto";
 import {Constants} from "../constants";
 import {DutyService} from "./_services/duty/duty.service";
 import { UsernamePipe } from './_pipes/username.pipe';
-import { WingPipe } from './_pipes/wing.pipe'
+import { WingPipe } from './_pipes/wing.pipe';
 
 // AoT requires an exported function for factories
 const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader => new TranslateHttpLoader(http, './assets/i18n/', '.json');

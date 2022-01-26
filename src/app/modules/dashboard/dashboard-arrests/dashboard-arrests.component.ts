@@ -64,6 +64,7 @@ export class DashboardArrestsComponent implements OnInit {
       next: () => {
         this.arrestError = "";
         this.arrestSuccess = "Verhaftung erfolgreich hinzugefügt"
+        this.arrestForm.reset()
         this.ngOnInit()
       },
       error: (err) => {

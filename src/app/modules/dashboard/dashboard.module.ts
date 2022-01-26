@@ -14,6 +14,7 @@ import {UsernamePipe} from "../../_pipes/username.pipe";
 import {WingPipe} from "../../_pipes/wing.pipe";
 import {CdkVirtualScrollViewport, ScrollingModule} from "@angular/cdk/scrolling";
 import { DashboardPersonalabteilungComponent } from './dashboard-personalabteilung/dashboard-personalabteilung.component';
+import { DashboardYardComponent } from './dashboard-yard/dashboard-yard.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { DashboardPersonalabteilungComponent } from './dashboard-personalabteilu
     DashboardArrestsComponent,
     UsernamePipe,
     WingPipe,
-    DashboardPersonalabteilungComponent
+    DashboardPersonalabteilungComponent,
+    DashboardYardComponent
   ],
   imports: [
     CommonModule,

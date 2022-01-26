@@ -1,0 +1,45 @@
+<h1>Hofgang</h1>
+<h3>Hier kannst du TV's eintragen, die im Moment Hofgang haben.</h3>
+<hr>
+<div class="tw-grid tw-grid-flow-col tw-grid-cols-2 tw-grid-rows-1">
+  <div class="col tw-m-4 tw-border tw-border-2 tw-border-orange-700 tw-rounded">
+    <h1>Hofgang eintragen</h1>
+
+    <form [formGroup]="yardEntryForm" (ngSubmit)="createEntry()">
+      <p class="success" *ngIf="success">{{success}}</p>
+      <p class="error" *ngIf="error">{{error}}</p>
+      <div class="group">
+        <input placeholder="Name d. Gefangenen" formControlName="prisonerName">
+      </div>
+      <div class="group">
+        <input placeholder="Einheiten" type="number" min="1" formControlName="time">
+      </div>
+      <div class="group">
+        <button type="submit" class="tw-bg-green-600 tw-pr-4 tw-pl-4 tw-pt-2 tw-pb-2 tw-rounded">Eintragen</button>
+
+      </div>
+    </form>
+  </div>
+  <div class="col tw-m-4 tw-border tw-border-2 tw-border-orange-700 tw-rounded">
+    <h1>Letzten 10 Hofgang-Einträge</h1>
+    <div style="overflow-x: auto">
+      <table>
+        <tr>
+          <th>#</th>
+          <th>Name d. Gefangenen</th>
+          <th>Wärter</th>
+          <th>Einheiten</th>
+          <th>Eingetragen am</th>
+        </tr>
+        <tr *ngFor="let entry of yardEntries; let i = index">
+          <td>{{i+1}}</td>
+          <td>{{entry.prisonerName}}</td>
+          <td>{{entry.warden | username | async}}</td>
+          <td>{{entry.time}}</td>
+          <td>{{entry.timeCreated | date:"dd.MM.yyyy HH:mm:ss"}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+</div>
