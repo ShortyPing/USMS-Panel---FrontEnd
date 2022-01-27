@@ -1,0 +1,102 @@
+<button routerLink="/dashboard/personalabteilung" class="tw-bg-orange-700 tw-p-4 tw-rounded"><i
+  class="fa-solid fa-arrow-left"></i> Zurück zur Benutzerliste
+</button>
+<h1>Benutzer Verwalten: {{user.forename}} {{user.lastname}} [USMS-{{user.dutyNumber}}]</h1>
+
+<hr>
+
+<div class="col tw-m-4 tw-border tw-border-2 tw-border-orange-700 tw-rounded">
+  <form (ngSubmit)="submit()" [formGroup]="form">
+    <div class="success" style="text-align: center" *ngIf="success">{{success}}</div>
+    <div class="error" style="text-align: center" *ngIf="error">{{error}}</div>
+    <div class="group">
+      <label>
+        <strong>Benutzername:</strong>
+      </label>
+      <input formControlName="username" placeholder="Benutzername">
+    </div>
+    <div class="group">
+      <label>
+        <strong>Vorname:</strong>
+      </label>
+      <input formControlName="forename" placeholder="Vorname">
+    </div>
+    <div class="group">
+      <label>
+        <strong>Nachname:</strong>
+      </label>
+      <input formControlName="lastname" placeholder="Nachname">
+    </div>
+    <div class="group">
+      <label>
+        <strong>Rang:</strong>
+      </label>
+      <select formControlName="rank">
+        <option *ngFor="let rank of ranks" [value]="getRankNumber(rank)">{{rank}}</option>
+      </select>
+    </div>
+    <div class="group">
+      <label>
+        <strong>Dienstnummer:</strong>
+      </label>
+      <input type="number" formControlName="dutyNumber" placeholder="Dienstnummer">
+    </div>
+    <div class="group">
+      <label>
+        <strong>Discord Tag:</strong>
+      </label>
+      <input formControlName="discordTag" placeholder="Discord Tag">
+    </div>
+    <div class="group">
+      <label>
+          <strong>Steamname:</strong>
+      </label>
+        <input formControlName="steamName" placeholder="Steamname">
+    </div>
+    <div class="group">
+      <label>
+        <strong>Telefonnumer:</strong>
+      </label>
+      <input formControlName="phoneNumber" placeholder="Telefonnumer">
+    </div>
+    <div class="group">
+      <label>
+        <strong>PKW-Führerschein:</strong>
+      </label>
+      <input formControlName="car" type="checkbox">
+    </div>
+    <div class="group">
+      <label>
+        <strong>LKW-Führerschein:</strong>
+      </label>
+      <input formControlName="truck" type="checkbox">
+    </div>
+    <div class="group">
+      <label>
+        <strong>Motorrad-Führerschein:</strong>
+      </label>
+      <input formControlName="bike" type="checkbox">
+    </div>
+    <div class="group">
+      <label>
+        <strong>Flugschein:</strong>
+      </label>
+      <input formControlName="plane" type="checkbox">
+    </div>
+    <div class="group">
+      <label>
+        <strong>Waffenschein:</strong>
+      </label>
+      <input formControlName="weapon" type="checkbox">
+    </div>
+    <div class="group">
+      <label>
+        <strong>Punkte:</strong>
+      </label>
+      <input type="number" formControlName="points">
+    </div>
+    <div class="group">
+      <button type="submit" class="tw-bg-green-600 tw-p-4 tw-rounded tw-m-4" style="width: 100%">Speichern</button>
+    </div>
+  </form>
+</div>

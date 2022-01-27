@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {AuthService} from "../auth/auth.service";
 import {Constants} from "../../../constants";
 import {User} from "../../../dto/user.dto";
+import {UserEditProperty} from "../../../dto/user-edit.dto";
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,37 @@ export class UserService {
 
   public getTerminatedUsers() {
     return this.http.get<User[]>(Constants.backendUrl + "/user/terminated", {
+      headers: new HttpHeaders()
+        .set("Authorization", `Bearer ${this.authService.getToken()}`)
+    })
+  }
+
+  public getUserById(id: string) {
+    return this.http.get<User>(Constants.backendUrl + "/user/id/" + id, {
+      headers: new HttpHeaders()
+        .set("Authorization", `Bearer ${this.authService.getToken()}`)
+    })
+  }
+
+  public editUser(id: string, data: UserEditProperty) {
+    return this.http.put(Constants.backendUrl + "/user/" + id, {
+      username: data.username,
+      forename: data.forename,
+      lastname: data.lastname,
+      rank: data.rank,
+      dutyNumber: data.dutyNumber,
+      discordTag: data.discordTag,
+      steamName: data.steamName,
+      phoneNumber: data.phoneNumber,
+      licenses: {
+        car: data.licenses.car,
+        truck: data.licenses.truck,
+        plane: data.licenses.plane,
+        bike: data.licenses.bike,
+        weapon: data.licenses.weapon
+      },
+      points: data.points
+    }, {
       headers: new HttpHeaders()
         .set("Authorization", `Bearer ${this.authService.getToken()}`)
     })

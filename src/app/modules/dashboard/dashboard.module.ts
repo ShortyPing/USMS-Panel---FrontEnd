@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {CommonModule, DatePipe} from '@angular/common';
+import {CommonModule, DatePipe, DecimalPipe} from '@angular/common';
 
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import {DashboardInitComponent} from './dashboard-init/dashboard-init.component';
@@ -15,6 +15,7 @@ import {WingPipe} from "../../_pipes/wing.pipe";
 import {CdkVirtualScrollViewport, ScrollingModule} from "@angular/cdk/scrolling";
 import { DashboardPersonalabteilungComponent } from './dashboard-personalabteilung/dashboard-personalabteilung.component';
 import { DashboardYardComponent } from './dashboard-yard/dashboard-yard.component';
+import { DashboardPersonalabteilungEditComponent } from './dashboard-personalabteilung/dashboard-personalabteilung-edit/dashboard-personalabteilung-edit.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { DashboardYardComponent } from './dashboard-yard/dashboard-yard.componen
     UsernamePipe,
     WingPipe,
     DashboardPersonalabteilungComponent,
-    DashboardYardComponent
+    DashboardYardComponent,
+    DashboardPersonalabteilungEditComponent,
   ],
   imports: [
     CommonModule,

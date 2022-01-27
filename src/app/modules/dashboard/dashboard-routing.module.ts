@@ -8,6 +8,9 @@ import {DashboardArrestsComponent} from "./dashboard-arrests/dashboard-arrests.c
 import {DashboardPersonalabteilungComponent} from "./dashboard-personalabteilung/dashboard-personalabteilung.component";
 import {PersonalabteilungGuard} from "../../_guards/specialPermission/personalabteilung.guard";
 import {DashboardYardComponent} from "./dashboard-yard/dashboard-yard.component";
+import {
+  DashboardPersonalabteilungEditComponent
+} from "./dashboard-personalabteilung/dashboard-personalabteilung-edit/dashboard-personalabteilung-edit.component";
 
 const routes: Routes = [
   {
@@ -33,6 +36,11 @@ const routes: Routes = [
       {
         path: "personalabteilung",
         component: DashboardPersonalabteilungComponent,
+        canActivate: [PersonalabteilungGuard],
+      },
+      {
+        path: "personalabteilung/edit/:id",
+        component: DashboardPersonalabteilungEditComponent,
         canActivate: [PersonalabteilungGuard]
       },
       {

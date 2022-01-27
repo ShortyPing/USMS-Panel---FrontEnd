@@ -13,6 +13,6 @@ html, body {
   @apply tw-text-white tw-select-none;
 }
 
-input {
+input, select {
   @apply tw-bg-layout-background-dark tw-rounded tw-mx-auto tw-mb-4 tw-h-11 tw-text-center focus:tw-outline-none focus:tw-border focus:tw-border-teal-700
 }
