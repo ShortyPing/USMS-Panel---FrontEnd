@@ -119,6 +119,7 @@
           <th>Rang</th>
           <th>Steam Name</th>
           <th>Registriert am</th>
+          <th>Beworben für</th>
           <th>Ausbilder</th>
           <th>Personalabteilung</th>
           <th>Leitung</th>
@@ -156,6 +157,7 @@
           <td>{{getRank(user.rank)}}</td>
           <td>{{user.steamName}}</td>
           <td>{{user.timeCreated | date:"dd.MM.yyyy HH:mm:ss"}}</td>
+          <td>{{getRank(user.registerRank)}}</td>
           <td>
             <i *ngIf="user.specialPermissions.ausbilder" style="color: green" class="fa-solid fa-check"></i>
             <i *ngIf="!user.specialPermissions.ausbilder" style="color: red" class="fa-solid fa-xmark"></i>
@@ -260,7 +262,7 @@
           <td>
             <div style="display: flex">
               <button class="tw-rounded tw-bg-green-600 tw-p-4" (click)="unterminateUser(user._id)">Einstellen</button>
-              <button class="tw-rounded tw-bg-amber-500 tw-p-4">Verwalten</button>
+              <button class="tw-rounded tw-bg-amber-500 tw-p-4" [routerLink]="'/dashboard/personalabteilung/edit/' + user._id">Verwalten</button>
             </div>
 
           </td>
@@ -330,7 +332,9 @@
       <td>{{calcDateDuty(duty)}}</td>
       <td>
         <div style="display: flex">
-          <button class="tw-rounded tw-bg-green-600 tw-p-4" (click)="confirmDuty(duty._id)">Verifizieren</button>
+          <button *ngIf="!duty.currentlyActive" class="tw-rounded tw-bg-green-600 tw-p-4" (click)="confirmDuty(duty._id)">Verifizieren</button>
+          <button *ngIf="duty.currentlyActive" class="tw-rounded tw-bg-red-600 tw-p-4" (click)="endDuty(duty._id)">Beenden</button>
+
         </div>
       </td>
     </tr>

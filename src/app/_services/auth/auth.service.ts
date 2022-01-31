@@ -27,7 +27,7 @@ export class AuthService {
     this.getAuth().subscribe({
       next: value => {
         this.user.next(value)
-        this.titleService.setTitle("United States Marshal Service | Panel (made by ShortPing) » Logged in as: " + value["forename"] + " " + value["lastname"] + " (" + value["username"] + ")")
+        this.titleService.setTitle("United States Marshal Service | Panel (made by ShortPing) » Logged in as: " + value["forename"] + " " + value["lastname"] + " (" + value["username"] + ") " + Constants.VERSION)
       },
       error: () => this.logout()
     })
@@ -102,7 +102,7 @@ export class AuthService {
     dutyService.currentDuty.next(undefined)
     dutyService.lastTenDuties.next([])
      this.router.navigate(['./']) //DISABLED FOR REGISTER FORM DEVELOPMENT
-    this.titleService.setTitle("United States Marshal Service | Panel (made by ShortPing)")
+    this.titleService.setTitle("United States Marshal Service | Panel (made by ShortPing) " + Constants.VERSION)
   }
 
 

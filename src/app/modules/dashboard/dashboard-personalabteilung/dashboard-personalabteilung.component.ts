@@ -159,4 +159,13 @@ export class DashboardPersonalabteilungComponent implements OnInit {
 
   }
 
+  endDuty(id: string) {
+    this.dutyService.endDuty(id).subscribe({
+      complete: () => {
+        this.ngOnInit()
+      },
+      error: (err) => console.log(err)
+    })
+  }
+
 }

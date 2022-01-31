@@ -3,7 +3,7 @@
   "author": {
     "name": "Michael Steinmötzger"
   },
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "main.js",
   "private": true,
   "dependencies": {}

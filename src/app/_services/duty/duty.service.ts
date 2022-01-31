@@ -43,13 +43,21 @@ export class DutyService {
   }
 
 
-  public endDuty() {
+  public endDuty(id?: string) {
     let token = this.authService.getToken()
 
-    return this.http.post(Constants.backendUrl + "/self/duty/end", undefined,{
+    if(!id) {
+      return this.http.post(Constants.backendUrl + "/self/duty/end", undefined,{
+        headers: new HttpHeaders().set("Authorization", `Bearer ${token}`)
+      });
+    }
+
+    return this.http.post(Constants.backendUrl + "/duty/adminend/" + id, undefined,{
       headers: new HttpHeaders().set("Authorization", `Bearer ${token}`)
     });
+
   }
+
 
   public getUnconfirmed() {
     let token = this.authService.getToken()
