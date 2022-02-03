@@ -16,6 +16,9 @@ import {CdkVirtualScrollViewport, ScrollingModule} from "@angular/cdk/scrolling"
 import { DashboardPersonalabteilungComponent } from './dashboard-personalabteilung/dashboard-personalabteilung.component';
 import { DashboardYardComponent } from './dashboard-yard/dashboard-yard.component';
 import { DashboardPersonalabteilungEditComponent } from './dashboard-personalabteilung/dashboard-personalabteilung-edit/dashboard-personalabteilung-edit.component';
+import { DashboardTrainingComponent } from './dashboard-training/dashboard-training.component';
+import { DashboardTrainingEditComponent } from './dashboard-training/dashboard-training-edit/dashboard-training-edit.component';
+import { DashboardTrainingCreateComponent } from './dashboard-training/dashboard-training-create/dashboard-training-create.component';
 
 
 @NgModule({
@@ -30,6 +33,9 @@ import { DashboardPersonalabteilungEditComponent } from './dashboard-personalabt
     DashboardPersonalabteilungComponent,
     DashboardYardComponent,
     DashboardPersonalabteilungEditComponent,
+    DashboardTrainingComponent,
+    DashboardTrainingEditComponent,
+    DashboardTrainingCreateComponent,
   ],
   imports: [
     CommonModule,

@@ -42,6 +42,7 @@ export class User {
   specialPermissions: {
     ausbilder: boolean,
     personalabteilung: boolean,
-    leitung: boolean
+    leitung: boolean,
+    ausbildungsLeitung: boolean
   }
 }

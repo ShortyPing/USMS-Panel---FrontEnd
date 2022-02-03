@@ -16,7 +16,7 @@
       <p routerLink="/dashboard/personalabteilung" routerLinkActive="active">Personalabteilung</p>
     </li>
     <li *ngIf="user.specialPermissions.ausbilder">
-      <p>Ausbilder</p>
+      <p routerLink="/dashboard/training" routerLinkActive="active">Ausbilder</p>
     </li>
     <li *ngIf="user.specialPermissions.leitung">
       <p>Leitung</p>

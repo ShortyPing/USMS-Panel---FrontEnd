@@ -11,6 +11,14 @@ import {DashboardYardComponent} from "./dashboard-yard/dashboard-yard.component"
 import {
   DashboardPersonalabteilungEditComponent
 } from "./dashboard-personalabteilung/dashboard-personalabteilung-edit/dashboard-personalabteilung-edit.component";
+import {DashboardTrainingComponent} from "./dashboard-training/dashboard-training.component";
+import {AusbilderGuard} from "../../_guards/specialPermission/ausbilder.guard";
+import {
+  DashboardTrainingEditComponent
+} from "./dashboard-training/dashboard-training-edit/dashboard-training-edit.component";
+import {
+  DashboardTrainingCreateComponent
+} from "./dashboard-training/dashboard-training-create/dashboard-training-create.component";
 
 const routes: Routes = [
   {
@@ -46,6 +54,21 @@ const routes: Routes = [
       {
         path: "yard",
         component: DashboardYardComponent
+      },
+      {
+        path: "training",
+        component: DashboardTrainingComponent,
+        canActivate: [AusbilderGuard]
+      },
+      {
+        path: "training/edit/:id",
+        component: DashboardTrainingEditComponent,
+        canActivate: [AusbilderGuard]
+      },
+      {
+        path: "training/create",
+        component: DashboardTrainingCreateComponent,
+        canActivate: [AusbilderGuard]
       }
     ]
   }

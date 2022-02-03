@@ -38,24 +38,47 @@ export class DashboardPersonalabteilungComponent implements OnInit {
       }
     })
 
+    //updateUnconfirmedDuties()
+    this.updateUnconfirmedDuties()
 
+    //updateTerminatedUsers
+    this.updateTermintedUsers()
+
+    //updateVerifiedUsers
+    this.updateVerifiedUsers()
+    //updateUnconfirmedArrests
+    this.updateUnconfirmedArrests()
+
+  }
+
+  updateUnconfirmedDuties() {
     this.dutyService.getUnconfirmed().subscribe({
       next: val => this.unverifiedDuties = val
     })
+  }
 
+  updateTermintedUsers() {
     this.userService.getTerminatedUsers().subscribe({
       next: (users) => {
         this.terminatedUsers = users;
       }
     })
+  }
+
+
+  updateVerifiedUsers() {
     this.userService.getNotVerifiedUsers().subscribe({
       next: (users) => this.notVerifiedUsers = users
     })
+    this.reloadPages()
+  }
 
+  updateUnconfirmedArrests() {
     this.arrestsService.getUnconfirmedArrests().subscribe({
       next: val => this.unconfirmedArrests = val
     })
   }
+
 
   getRank(number: number) {
     return Rank[number]
@@ -63,27 +86,50 @@ export class DashboardPersonalabteilungComponent implements OnInit {
 
   verifyUser(id: string) {
     this.userService.verifyUser(id).subscribe({
-      complete: () => this.ngOnInit()
+      complete: () => {
+        this.updateVerifiedUsers()
+        this.reloadPages()
+      }
     })
   }
 
   rejectVerifyUser(id: string) {
     this.userService.rejectUserVerification(id).subscribe({
-      complete: () => this.ngOnInit()
+      complete: () => {
+        this.updateVerifiedUsers()
+      }
     })
   }
 
   unterminateUser(id: string) {
     this.userService.unTerminateUser(id).subscribe({
-      complete: () => this.ngOnInit()
+      complete: () => {
+        this.updateTermintedUsers()
+        this.updateVerifiedUsers()
+      }
     })
   }
   confirmArrest(id: string) {
     this.arrestsService.verifyArrest(id).subscribe({
-      complete: () => this.ngOnInit()
+      complete: () => {
+        this.reloadPages()
+        this.updateUnconfirmedArrests()
+      }
     })
   }
 
+
+  reloadPages() {
+    this.userService.getUsers(this.currentPage).subscribe({
+      next: (users) => {
+        console.log(users)
+        if (users.length == 0) {
+          return;
+        }
+        this.users = users;
+      }
+    })
+  }
 
   nextPage() {
     this.userService.getUsers(this.currentPage + 1).subscribe({
@@ -102,7 +148,8 @@ export class DashboardPersonalabteilungComponent implements OnInit {
   terminateUser(id: string) {
     this.userService.terminateUser(id).subscribe({
       complete: () => {
-        this.ngOnInit()
+        this.updateTermintedUsers()
+        this.reloadPages()
 
       }
     })
@@ -122,7 +169,8 @@ export class DashboardPersonalabteilungComponent implements OnInit {
   confirmDuty(id: string) {
     this.dutyService.confirm(id).subscribe({
       complete: () => {
-        this.ngOnInit()
+        this.updateUnconfirmedDuties()
+        this.reloadPages()
       }
     })
   }

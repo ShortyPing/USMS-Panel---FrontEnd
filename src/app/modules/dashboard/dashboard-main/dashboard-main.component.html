@@ -24,3 +24,74 @@
 
 
 </div>
+
+<div class="cards">
+
+  <div class="card" style="width: 50%">
+    <h1>Derzeitige Ausbildungen</h1>
+    <hr>
+    <p *ngIf="trainings.length == 0">Derzeit stehen keine Ausbildungen an!</p>
+    <div class="card" *ngFor="let training of trainings" style="width: 80%">
+      <h1>{{training.name}}</h1>
+      <hr>
+      <div *ngIf="training.fromRank != training.toRank" class="info">
+        <h4>Von Rang: </h4>
+        <p>{{getRank(training.fromRank)}}</p>
+      </div>
+      <div *ngIf="training.fromRank != training.toRank" class="info">
+        <h4>Zu Rang: </h4>
+        <p>{{getRank(training.toRank)}}</p>
+      </div>
+      <div *ngIf="training.fromRank == training.toRank" class="info">
+        <h4>Keine Rangbeförderung</h4>
+      </div>
+      <div *ngIf="training.fromRank == training.toRank" class="info">
+        <h4>Minimale Ranganforderung: </h4>
+        <p>{{getRank(training.fromRank)}}</p>
+      </div>
+      <div class="info">
+        <h4>Maximale Mitglieder: </h4>
+        <p>{{training.maximumMembers}}</p>
+      </div>
+      <div class="info">
+        <h4>Beginn: </h4>
+        <p>{{training.begin | date: "dd.MM.yyyy HH:mm:ss"}}</p>
+      </div>
+
+      <div class="info">
+        <h4>Bereits begonnen: </h4>
+        <p>{{training.isStarted ? "Ja" : "Nein"}}</p>
+      </div>
+
+      <div class="info">
+        <h4>Eingeschriebene Mitglieder: </h4>
+        <p>{{training.members.length}}</p>
+      </div>
+      <div class="info">
+        <h4>Erstellt von: </h4>
+        <p>{{training.createdBy | username |async}}</p>
+      </div>
+      <button *ngIf="!training.members.includes(user._id) && training.fromRank == user.rank && !training.isStarted && training.members.length < training.maximumMembers"
+              (click)="attendTraining(training._id)" class="tw-bg-green-600 tw-p-4 tw-rounded tw-mt-2"
+              style="width: 100%">Einschreiben
+      </button>
+      <button *ngIf="training.members.includes(user._id) && training.fromRank == user.rank&& !training.isStarted"
+              (click)="unAttendTraining(training._id)" class="tw-bg-orange-700 tw-p-4 tw-rounded tw-mt-2"
+              style="width: 100%">Austragen
+      </button>
+      <button *ngIf="training.fromRank != user.rank&& !training.isStarted" disabled
+              (click)="unAttendTraining(training._id)" class="tw-bg-red-600 tw-p-4 tw-rounded tw-mt-2"
+              style="width: 100%">Kein Zugriff
+      </button>
+      <button *ngIf="training.isStarted" disabled (click)="unAttendTraining(training._id)"
+              class="tw-bg-red-600 tw-p-4 tw-rounded tw-mt-2" style="width: 100%">Ausbildung hat bereits begonnen!
+      </button>
+      <button *ngIf="training.fromRank == user.rank && !training.isStarted && training.members.length >= training.maximumMembers && !training.members.includes(user._id)" disabled
+              (click)="unAttendTraining(training._id)" class="tw-bg-red-600 tw-p-4 tw-rounded tw-mt-2"
+              style="width: 100%">Maximale Mitgliederanzahl erreicht
+      </button>
+
+    </div>
+
+  </div>
+</div>

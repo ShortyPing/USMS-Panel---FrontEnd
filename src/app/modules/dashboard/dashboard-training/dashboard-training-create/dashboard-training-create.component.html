@@ -1,0 +1,46 @@
+<h1>Verwaltung: Ausbildungen - Erstellen</h1>
+<hr>
+<div class="col tw-m-4 tw-border tw-border-2 tw-border-orange-700 tw-rounded">
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="group">
+      <label>
+        <strong>Name:</strong>
+      </label>
+      <input formControlName="name" type="text" placeholder="Name">
+    </div>
+    <div class="group">
+      <label>
+        <strong>Von Rang:</strong>
+      </label>
+      <select formControlName="fromRank">
+        <option value="" disabled selected>Wähle einen Rang von dem die Ausbildung aus starten soll.</option>
+        <option *ngFor="let rank of ranks" [value]="getRankNumber(rank)">{{rank}}</option>
+      </select>
+    </div>
+    <div class="group">
+      <label>
+        <strong>Zu Rang:</strong>
+      </label>
+      <select formControlName="toRank">
+        <option value="" disabled selected>Wähle einen Rang zu dem alle Mitglieder, die bestanden haben befördert werden sollen.</option>
+        <option *ngFor="let rank of ranks" [value]="getRankNumber(rank)">{{rank}}</option>
+      </select>
+    </div>
+    <div class="group">
+      <label>
+        <strong>Maximale Mitgliederanzahl:</strong>
+      </label>
+      <input type="number" formControlName="maximumMembers" placeholder="Max. Mitgliederanzahl">
+    </div>
+    <div class="group">
+      <label>
+        <strong>Beginn:</strong>
+      </label>
+      <input type="datetime-local" formControlName="begin" placeholder="Beginn">
+    </div>
+    <div class="group">
+      <button type="submit" class="tw-bg-green-600 tw-p-4 tw-rounded">Erstellen</button>
+    </div>
+  </form>
+</div>

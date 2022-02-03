@@ -26,3 +26,19 @@ h3 {
   }
 
 }
+
+.info {
+
+  &:first-of-type {
+    padding-top: 15px;
+  }
+
+  h4, p {
+    display: inline;
+
+  }
+
+  h4 {
+    font-weight: bold;
+  }
+}

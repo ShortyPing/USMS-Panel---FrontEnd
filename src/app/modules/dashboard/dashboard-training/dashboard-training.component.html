@@ -1,0 +1,40 @@
+<h1>Verwaltung: Ausbildungen</h1>
+<hr>
+<div class="col tw-m-4 tw-border tw-border-2 tw-border-orange-700 tw-rounded">
+  <h1>Liste aller Ausbilungen</h1>
+  <button *ngIf="user.specialPermissions.ausbildungsLeitung" routerLink="/dashboard/training/create" class="tw-bg-green-600 tw-p-4 tw-rounded tw-m-4">Neue Ausbildung erstellen</button>
+  <table>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Von</th>
+      <th>Bis</th>
+      <th>Erstellt von</th>
+      <th>Anzahl Mitglieder</th>
+      <th>Maximale Mitglieder</th>
+      <th>Erstellt am</th>
+      <th>Beginn</th>
+      <th>Gestartet</th>
+      <th>Verwalten</th>
+    </tr>
+    <tr *ngFor="let training of trainings; let i = index">
+      <th>{{i+1}}</th>
+      <th>{{training.name}}</th>
+      <th *ngIf="training.fromRank != training.toRank">{{getRank(training.fromRank)}}</th>
+      <th  *ngIf="training.fromRank != training.toRank">{{getRank(training.toRank)}}</th>
+      <th colspan="2" *ngIf="training.fromRank == training.toRank">{{getRank(training.toRank)}}</th>
+      <th>{{training.createdBy | username | async}}</th>
+      <th>{{training.members.length}}</th>
+      <th>{{training.maximumMembers}}</th>
+      <th>{{training.createdOn | date: "dd.MM.yyyy HH:mm:ss"}}</th>
+      <th>{{training.begin | date: "dd.MM.yyyy HH:mm:ss"}}</th>
+      <th>{{training.isStarted?"Ja":"Nein"}}</th>
+      <th>
+        <button class="tw-bg-orange-700 tw-p-4 tw-rounded tw-m-2" (click)="editTraining(training._id)">Verwalten</button>
+        <button class="tw-bg-red-600 tw-p-4 tw-rounded tw-m-2" *ngIf="user.specialPermissions.ausbildungsLeitung" (click)="endTraining(training._id)">{{training.isStarted?"Beenden und Befördern":"Löschen"}}</button>
+        <button class="tw-bg-green-600 tw-p-4 tw-rounded tw-m-2" *ngIf="!training.isStarted" (click)="startTraining(training._id)">Ausbildung starten</button>
+        <button class="tw-bg-red-600 tw-p-4 tw-rounded tw-m-2" *ngIf="training.isStarted" (click)="stopTraining(training._id)">Ausbildung stoppen</button>
+      </th>
+    </tr>
+  </table>
+</div>
